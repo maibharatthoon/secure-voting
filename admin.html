@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Control Panel</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Merriweather', serif;
+      background-image: url('key.jpeg');
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #ffe6e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 400px;
+      padding: 20px;
+      border: 2px solid black;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(6, 215, 248, 0.3);
+      text-align: center;
+    }
+
+    input {
+      width: 80%;
+      padding: 8px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      width: 35%;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: 1px solid #000;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: left;
+      width: 60%;
+      margin: 10px auto;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+  </style>
+
+  <script>
+    function addCandidate() {
+      const name = document.getElementById("newCandidate").value;
+      if (name.trim() === "") return;
+
+      const list = document.getElementById("candidateList");
+      const li = document.createElement("li");
+      li.textContent = name;
+      list.appendChild(li);
+
+      document.getElementById("newCandidate").value = "";
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>ADMIN CONTROL PANEL</h2>
+
+    <!-- Add Candidate Section -->
+    <h3>Add Candidates</h3>
+    <input type="text" id="newCandidate" placeholder="Enter candidate name">
+    <button type="button" onclick="addCandidate()">Add Candidate</button>
+
+    <ul id="candidateList"></ul>
+
+    <hr>
+
+    <!-- End Election Button -->
+    <button type="button">End Election</button>
+  </div>
+</body>
+</html>
