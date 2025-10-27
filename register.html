@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voter Registration</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <style>
+    body{
+      margin:0;
+      padding:0;
+      font-family:'Merriweather', serif;
+      background-image:url('Bulk SMS Service.jpeg');
+      background-size:90%;
+      background-repeat:no-repeat;
+      background-position:center;
+      background-color:#ffe6e6;
+      display:flex;
+      flex-direction:column;
+      align-items: center;
+      justify-content:center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color:rgba(255, 255, 255, 0.9);
+      width:400px;
+      padding:20px;
+      border:2px solid black;
+      border-radius:8px;
+      box-shadow: 0 0 10px rgba(6, 215, 248, 0.3);
+      text-align:center;
+    }
+    input {
+      width:100%;
+      padding:8px;
+      margin:10px 0;
+      box-sizing:border-box;
+    }
+    button{
+      background-color:black;
+      color:white;
+      padding:10px;
+      width:30%;
+      border:none;
+      cursor:pointer;
+      margin-top:10px;
+      border-radius:5px;
+      font-size:16px;
+    }
+    button:hover{
+      background-color:#333;
+    }
+  </style>
+  <script>
+    function registerUser() {
+      const id = document.getElementById("id").value.trim();
+      const password = document.getElementById("password").value.trim();
+      if (id === "" || password === "") {
+        alert(" Please fill all fields!");
+        return;
+      }
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      if (users.find(u => u.id === id)) {
+        alert(" This ID is already registered!");
+        return;
+      }
+      users.push({ id, password, voted: false });
+      localStorage.setItem("users", JSON.stringify(users));
+      alert(" Registration Successful!");
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>REGISTER AS VOTER</h2>
+    <input type="text" id="id" placeholder="Enter ID"><br>
+    <input type="password" id="password" placeholder="Set Password"><br>
+    <button type="button" onclick="registerUser()">Register</button>
+  </div>
+</body>
+</html>

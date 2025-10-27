@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Election Results</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Merriweather', serif;
+      background-image: url('bar.jpeg');
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #ffe6e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .result-container {
+      width: 400px;
+      background: rgba(255,255,255,0.9);
+      padding: 25px;
+      border: 2px solid black;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      color: black;
+      text-align: center;
+    }
+
+    .bar {
+      background-color: #e4e4e4;
+      border-radius: 8px;
+      margin: 8px 0;
+      overflow: hidden;
+      height: 25px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      text-align: right;
+      padding-right: 8px;
+      color: white;
+      font-size: 13px;
+      line-height: 25px;
+      background-color: #6b46c1;
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    h2 {
+      color: #6b46c1;
+    }
+
+    .winner {
+      background: #6b46c1;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    window.onload = function() {
+      const container = document.getElementById("resultBars");
+      const votes = JSON.parse(localStorage.getItem("votes")) || {};
+
+      if (Object.keys(votes).length === 0) {
+        container.innerHTML = "<p>No votes have been cast yet.</p>";
+        return;
+      }
+      let winner = "";
+      let maxVotes = 0;
+      for (const name in votes) {
+        if (votes[name] > maxVotes) {
+          maxVotes = votes[name];
+          winner = name;
+        }
+      }
+      const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
+      for (const name in votes) {
+        const percent = ((votes[name] / totalVotes) * 100).toFixed(1);
+        const bar = document.createElement("div");
+        bar.className = "bar";
+
+        const fill = document.createElement("div");
+        fill.className = "bar-fill";
+        fill.style.width = percent + "%";
+        fill.textContent = `${name} – ${votes[name]} votes (${percent}%)`;
+
+        bar.appendChild(fill);
+        container.appendChild(bar);
+      }
+      document.getElementById("winner").textContent = `🏆 Winner: ${winner} (${maxVotes} votes)`;
+    };
+  </script>
+</head>
+<body>
+  <div class="result-container">
+    <h2>Election Results</h2>
+    <div id="resultBars"></div>
+    <div class="winner" id="winner"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voting Dashboard</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <script>
+    function addCandidate(){
+      const name = document.getElementById("newCandidate").value;
+      if(name.trim()==="")return;
+      const list=document.getElementById("candidateList");
+      const label=document.createElement("label");
+      label.innerHTML=`<input type="radio" name="candidate" value="${name}"> ${name}<br>`;
+      list.appendChild(label);
+      document.getElementById("newCandidate").value="";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Cast Your Vote</h2>
+    <input type="text" id="newCandidate" placeholder="Enter candidate name">
+    <button type="button" onclick="addCandidate()">Add Candidate</button>
+    <form>
+      <div id="candidateList"></div>
+      <button type="button">Submit Vote</button>
+    </form>
+  </div>
+</body>
+</html>
