@@ -1,0 +1,40 @@
+body {
+  background: #ffffff;
+  color:rgb(0, 0, 0);
+  font-family: 'Merriweather';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container{ 
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #020404;
+  text-align: center;
+  width: 320px;
+}
+input,button{     
+  margin:8px;
+  padding:8px;
+  border:none;
+  border-radius:5px;
+}
+button{  
+  background-color:#000000;
+  color: white;
+  cursor: pointer;
+}
+button:hover{       
+  background-color: #000000fb;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th,td{
+  border: 1px solid white;
+  padding: 8px;
+}
